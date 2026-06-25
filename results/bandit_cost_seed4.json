@@ -1,0 +1,80 @@
+{
+  "model": "bandit",
+  "checkpoint": "checkpoints/bandit_grpo_phi_seed4/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 148,
+      "solve_rate": 0.74,
+      "mean_steps": 1.355,
+      "mean_proof_length": 1.2364864864864864,
+      "tactic_failure_rate": 0.1918819188191882
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 123,
+      "solve_rate": 0.615,
+      "mean_steps": 1.955,
+      "mean_proof_length": 1.9268292682926829,
+      "tactic_failure_rate": 0.1969309462915601
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 76,
+      "solve_rate": 0.38,
+      "mean_steps": 2.555,
+      "mean_proof_length": 2.9210526315789473,
+      "tactic_failure_rate": 0.24266144814090018
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 47,
+      "solve_rate": 0.235,
+      "mean_steps": 3.385,
+      "mean_proof_length": 4.085106382978723,
+      "tactic_failure_rate": 0.2259970457902511
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 34,
+      "solve_rate": 0.17,
+      "mean_steps": 3.865,
+      "mean_proof_length": 5.0588235294117645,
+      "tactic_failure_rate": 0.2147477360931436
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 24,
+      "solve_rate": 0.12,
+      "mean_steps": 4.69,
+      "mean_proof_length": 6.208333333333333,
+      "tactic_failure_rate": 0.18763326226012794
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 16,
+      "solve_rate": 0.08,
+      "mean_steps": 5.16,
+      "mean_proof_length": 7.5,
+      "tactic_failure_rate": 0.17829457364341086
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 16,
+      "solve_rate": 0.08,
+      "mean_steps": 5.93,
+      "mean_proof_length": 8.75,
+      "tactic_failure_rate": 0.1551433389544688
+    }
+  }
+}

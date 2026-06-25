@@ -1,0 +1,80 @@
+{
+  "model": "bandit",
+  "checkpoint": "checkpoints/bandit_grpo_phi_seed2/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 113,
+      "solve_rate": 0.565,
+      "mean_steps": 1.265,
+      "mean_proof_length": 1.1415929203539823,
+      "tactic_failure_rate": 0.3438735177865613
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 79,
+      "solve_rate": 0.395,
+      "mean_steps": 1.88,
+      "mean_proof_length": 1.8734177215189873,
+      "tactic_failure_rate": 0.32180851063829785
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 51,
+      "solve_rate": 0.255,
+      "mean_steps": 2.385,
+      "mean_proof_length": 2.8627450980392157,
+      "tactic_failure_rate": 0.31236897274633124
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 35,
+      "solve_rate": 0.175,
+      "mean_steps": 3.24,
+      "mean_proof_length": 4.142857142857143,
+      "tactic_failure_rate": 0.25462962962962965
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 20,
+      "solve_rate": 0.1,
+      "mean_steps": 3.64,
+      "mean_proof_length": 4.95,
+      "tactic_failure_rate": 0.24725274725274726
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 16,
+      "solve_rate": 0.08,
+      "mean_steps": 4.555,
+      "mean_proof_length": 5.75,
+      "tactic_failure_rate": 0.20197585071350166
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 10,
+      "solve_rate": 0.05,
+      "mean_steps": 4.92,
+      "mean_proof_length": 7.8,
+      "tactic_failure_rate": 0.19308943089430894
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 10,
+      "solve_rate": 0.05,
+      "mean_steps": 5.565,
+      "mean_proof_length": 8.5,
+      "tactic_failure_rate": 0.1707097933513028
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "model": "ppo",
+  "checkpoint": "checkpoints/ppo_baseline_lambda1.0_seed2/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 200,
+      "solve_rate": 1.0,
+      "mean_steps": 1.39,
+      "mean_proof_length": 1.39,
+      "tactic_failure_rate": 0.0
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 200,
+      "solve_rate": 1.0,
+      "mean_steps": 2.17,
+      "mean_proof_length": 2.17,
+      "tactic_failure_rate": 0.0
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 197,
+      "solve_rate": 0.985,
+      "mean_steps": 3.17,
+      "mean_proof_length": 3.1878172588832485,
+      "tactic_failure_rate": 0.00473186119873817
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 196,
+      "solve_rate": 0.98,
+      "mean_steps": 4.495,
+      "mean_proof_length": 4.525510204081633,
+      "tactic_failure_rate": 0.004449388209121246
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 192,
+      "solve_rate": 0.96,
+      "mean_steps": 5.385,
+      "mean_proof_length": 5.489583333333333,
+      "tactic_failure_rate": 0.007428040854224698
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 185,
+      "solve_rate": 0.925,
+      "mean_steps": 6.8,
+      "mean_proof_length": 6.875675675675676,
+      "tactic_failure_rate": 0.011029411764705883
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 176,
+      "solve_rate": 0.88,
+      "mean_steps": 7.39,
+      "mean_proof_length": 7.7727272727272725,
+      "tactic_failure_rate": 0.016238159675236806
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 178,
+      "solve_rate": 0.89,
+      "mean_steps": 8.48,
+      "mean_proof_length": 8.94943820224719,
+      "tactic_failure_rate": 0.012971698113207548
+    }
+  }
+}

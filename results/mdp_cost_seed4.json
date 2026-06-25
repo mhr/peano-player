@@ -1,0 +1,80 @@
+{
+  "model": "ppo",
+  "checkpoint": "checkpoints/ppo_baseline_lambda1.0_seed4/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 200,
+      "solve_rate": 1.0,
+      "mean_steps": 1.39,
+      "mean_proof_length": 1.39,
+      "tactic_failure_rate": 0.0
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 198,
+      "solve_rate": 0.99,
+      "mean_steps": 2.13,
+      "mean_proof_length": 2.1414141414141414,
+      "tactic_failure_rate": 0.004694835680751174
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 196,
+      "solve_rate": 0.98,
+      "mean_steps": 3.12,
+      "mean_proof_length": 3.1530612244897958,
+      "tactic_failure_rate": 0.00641025641025641
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 190,
+      "solve_rate": 0.95,
+      "mean_steps": 4.435,
+      "mean_proof_length": 4.521052631578947,
+      "tactic_failure_rate": 0.011273957158962795
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 188,
+      "solve_rate": 0.94,
+      "mean_steps": 5.355,
+      "mean_proof_length": 5.462765957446808,
+      "tactic_failure_rate": 0.011204481792717087
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 181,
+      "solve_rate": 0.905,
+      "mean_steps": 6.72,
+      "mean_proof_length": 6.762430939226519,
+      "tactic_failure_rate": 0.014136904761904762
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 171,
+      "solve_rate": 0.855,
+      "mean_steps": 7.31,
+      "mean_proof_length": 7.637426900584796,
+      "tactic_failure_rate": 0.019835841313269494
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 167,
+      "solve_rate": 0.835,
+      "mean_steps": 8.34,
+      "mean_proof_length": 8.964071856287426,
+      "tactic_failure_rate": 0.019784172661870502
+    }
+  }
+}

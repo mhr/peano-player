@@ -1,0 +1,80 @@
+{
+  "model": "bandit",
+  "checkpoint": "checkpoints/bandit_grpo_nophi_seed3/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 118,
+      "solve_rate": 0.59,
+      "mean_steps": 1.32,
+      "mean_proof_length": 1.1271186440677967,
+      "tactic_failure_rate": 0.3106060606060606
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 71,
+      "solve_rate": 0.355,
+      "mean_steps": 1.885,
+      "mean_proof_length": 1.8732394366197183,
+      "tactic_failure_rate": 0.3421750663129973
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 47,
+      "solve_rate": 0.235,
+      "mean_steps": 2.335,
+      "mean_proof_length": 2.9148936170212765,
+      "tactic_failure_rate": 0.32762312633832974
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 34,
+      "solve_rate": 0.17,
+      "mean_steps": 3.2,
+      "mean_proof_length": 4.0,
+      "tactic_failure_rate": 0.259375
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 24,
+      "solve_rate": 0.12,
+      "mean_steps": 3.605,
+      "mean_proof_length": 5.208333333333333,
+      "tactic_failure_rate": 0.24410540915395285
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 22,
+      "solve_rate": 0.11,
+      "mean_steps": 4.605,
+      "mean_proof_length": 6.409090909090909,
+      "tactic_failure_rate": 0.19326818675352878
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 9,
+      "solve_rate": 0.045,
+      "mean_steps": 4.83,
+      "mean_proof_length": 7.888888888888889,
+      "tactic_failure_rate": 0.19772256728778467
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 10,
+      "solve_rate": 0.05,
+      "mean_steps": 5.575,
+      "mean_proof_length": 7.8,
+      "tactic_failure_rate": 0.17040358744394618
+    }
+  }
+}

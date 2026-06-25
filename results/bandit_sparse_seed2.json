@@ -1,0 +1,80 @@
+{
+  "model": "bandit",
+  "checkpoint": "checkpoints/bandit_grpo_nophi_seed2/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 126,
+      "solve_rate": 0.63,
+      "mean_steps": 1.31,
+      "mean_proof_length": 1.1825396825396826,
+      "tactic_failure_rate": 0.2824427480916031
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 81,
+      "solve_rate": 0.405,
+      "mean_steps": 1.88,
+      "mean_proof_length": 1.8888888888888888,
+      "tactic_failure_rate": 0.31648936170212766
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 55,
+      "solve_rate": 0.275,
+      "mean_steps": 2.32,
+      "mean_proof_length": 2.8181818181818183,
+      "tactic_failure_rate": 0.3125
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 38,
+      "solve_rate": 0.19,
+      "mean_steps": 3.25,
+      "mean_proof_length": 4.078947368421052,
+      "tactic_failure_rate": 0.24923076923076923
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 26,
+      "solve_rate": 0.13,
+      "mean_steps": 3.635,
+      "mean_proof_length": 5.269230769230769,
+      "tactic_failure_rate": 0.2393397524071527
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 16,
+      "solve_rate": 0.08,
+      "mean_steps": 4.465,
+      "mean_proof_length": 5.5,
+      "tactic_failure_rate": 0.20604703247480402
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 9,
+      "solve_rate": 0.045,
+      "mean_steps": 4.955,
+      "mean_proof_length": 7.333333333333333,
+      "tactic_failure_rate": 0.1927346115035318
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 11,
+      "solve_rate": 0.055,
+      "mean_steps": 5.635,
+      "mean_proof_length": 9.181818181818182,
+      "tactic_failure_rate": 0.16770186335403728
+    }
+  }
+}

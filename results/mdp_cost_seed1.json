@@ -1,0 +1,80 @@
+{
+  "model": "ppo",
+  "checkpoint": "checkpoints/ppo_baseline_lambda1.0_seed1/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 200,
+      "solve_rate": 1.0,
+      "mean_steps": 1.39,
+      "mean_proof_length": 1.39,
+      "tactic_failure_rate": 0.0
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 197,
+      "solve_rate": 0.985,
+      "mean_steps": 2.145,
+      "mean_proof_length": 2.1421319796954315,
+      "tactic_failure_rate": 0.006993006993006993
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 196,
+      "solve_rate": 0.98,
+      "mean_steps": 3.125,
+      "mean_proof_length": 3.142857142857143,
+      "tactic_failure_rate": 0.0064
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 191,
+      "solve_rate": 0.955,
+      "mean_steps": 4.515,
+      "mean_proof_length": 4.5811518324607325,
+      "tactic_failure_rate": 0.009966777408637873
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 186,
+      "solve_rate": 0.93,
+      "mean_steps": 5.38,
+      "mean_proof_length": 5.462365591397849,
+      "tactic_failure_rate": 0.013011152416356878
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 173,
+      "solve_rate": 0.865,
+      "mean_steps": 6.64,
+      "mean_proof_length": 6.728323699421965,
+      "tactic_failure_rate": 0.02033132530120482
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 172,
+      "solve_rate": 0.86,
+      "mean_steps": 7.405,
+      "mean_proof_length": 7.680232558139535,
+      "tactic_failure_rate": 0.018906144496961513
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 163,
+      "solve_rate": 0.815,
+      "mean_steps": 8.39,
+      "mean_proof_length": 8.895705521472392,
+      "tactic_failure_rate": 0.02205005959475566
+    }
+  }
+}

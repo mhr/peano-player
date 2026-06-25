@@ -1,0 +1,80 @@
+{
+  "model": "bandit",
+  "checkpoint": "checkpoints/bandit_grpo_nophi_seed0/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 121,
+      "solve_rate": 0.605,
+      "mean_steps": 1.29,
+      "mean_proof_length": 1.1239669421487604,
+      "tactic_failure_rate": 0.3062015503875969
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 69,
+      "solve_rate": 0.345,
+      "mean_steps": 1.84,
+      "mean_proof_length": 1.855072463768116,
+      "tactic_failure_rate": 0.35597826086956524
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 47,
+      "solve_rate": 0.235,
+      "mean_steps": 2.295,
+      "mean_proof_length": 2.851063829787234,
+      "tactic_failure_rate": 0.3333333333333333
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 29,
+      "solve_rate": 0.145,
+      "mean_steps": 3.225,
+      "mean_proof_length": 4.0,
+      "tactic_failure_rate": 0.2651162790697674
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 23,
+      "solve_rate": 0.115,
+      "mean_steps": 3.56,
+      "mean_proof_length": 5.130434782608695,
+      "tactic_failure_rate": 0.24859550561797752
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 20,
+      "solve_rate": 0.1,
+      "mean_steps": 4.51,
+      "mean_proof_length": 6.4,
+      "tactic_failure_rate": 0.19955654101995565
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 9,
+      "solve_rate": 0.045,
+      "mean_steps": 4.85,
+      "mean_proof_length": 7.555555555555555,
+      "tactic_failure_rate": 0.19690721649484536
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 7,
+      "solve_rate": 0.035,
+      "mean_steps": 5.42,
+      "mean_proof_length": 7.571428571428571,
+      "tactic_failure_rate": 0.17804428044280443
+    }
+  }
+}

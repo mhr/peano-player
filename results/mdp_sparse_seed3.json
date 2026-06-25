@@ -1,0 +1,80 @@
+{
+  "model": "ppo",
+  "checkpoint": "checkpoints/ppo_baseline_lambda0.0_seed3/policy_2000.eqx",
+  "seed": 9999,
+  "trials_per_difficulty": 200,
+  "results_by_difficulty": {
+    "1": {
+      "difficulty": 1,
+      "trials": 200,
+      "solved": 195,
+      "solve_rate": 0.975,
+      "mean_steps": 1.36,
+      "mean_proof_length": 1.358974358974359,
+      "tactic_failure_rate": 0.01838235294117647
+    },
+    "2": {
+      "difficulty": 2,
+      "trials": 200,
+      "solved": 178,
+      "solve_rate": 0.89,
+      "mean_steps": 2.055,
+      "mean_proof_length": 2.101123595505618,
+      "tactic_failure_rate": 0.0535279805352798
+    },
+    "3": {
+      "difficulty": 3,
+      "trials": 200,
+      "solved": 153,
+      "solve_rate": 0.765,
+      "mean_steps": 2.83,
+      "mean_proof_length": 3.0326797385620914,
+      "tactic_failure_rate": 0.08303886925795052
+    },
+    "4": {
+      "difficulty": 4,
+      "trials": 200,
+      "solved": 135,
+      "solve_rate": 0.675,
+      "mean_steps": 3.975,
+      "mean_proof_length": 4.377777777777778,
+      "tactic_failure_rate": 0.08176100628930817
+    },
+    "5": {
+      "difficulty": 5,
+      "trials": 200,
+      "solved": 139,
+      "solve_rate": 0.695,
+      "mean_steps": 4.81,
+      "mean_proof_length": 5.381294964028777,
+      "tactic_failure_rate": 0.06340956340956341
+    },
+    "6": {
+      "difficulty": 6,
+      "trials": 200,
+      "solved": 109,
+      "solve_rate": 0.545,
+      "mean_steps": 5.865,
+      "mean_proof_length": 6.513761467889908,
+      "tactic_failure_rate": 0.07757885763000852
+    },
+    "7": {
+      "difficulty": 7,
+      "trials": 200,
+      "solved": 86,
+      "solve_rate": 0.43,
+      "mean_steps": 6.315,
+      "mean_proof_length": 7.6395348837209305,
+      "tactic_failure_rate": 0.09026128266033254
+    },
+    "8": {
+      "difficulty": 8,
+      "trials": 200,
+      "solved": 96,
+      "solve_rate": 0.48,
+      "mean_steps": 7.38,
+      "mean_proof_length": 8.677083333333334,
+      "tactic_failure_rate": 0.07046070460704607
+    }
+  }
+}
