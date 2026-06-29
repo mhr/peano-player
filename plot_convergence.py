@@ -66,14 +66,26 @@ CONDITION_LABELS = {
     "bandit_sparse": "Bandit"
 }
 
+CONDITION_COLORS = {
+    "multistep_cost":   "#E23145",  # Peano Player — crimson
+    "multistep_sparse": "#FF7F0E",  # Multi-Step (reward only) — orange
+    "bandit_cost":      "#2CA02C",  # Bandit + cost — green
+    "bandit_sparse":    "#1F77B4",  # Bandit — blue
+}
+
 SMOOTH_BETA = 0.95
 
 
 def apply_style():
     plt.rcParams.update({
-        "font.family": "serif",
-        "font.serif": ["DejaVu Serif"],
-        "mathtext.fontset": "stix",
+        # "font.family": "serif",
+        # "font.serif": ["DejaVu Serif"],
+        # "mathtext.fontset": "stix",
+        
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "mathtext.fontset": "dejavusans",
+
         "font.size": 9,
         "axes.labelsize": 9,
         "axes.titlesize": 9,
@@ -213,15 +225,35 @@ def plot_training_solve_rate(summary):
             print(f"Skipping empty condition: {condition}")
             continue
 
+        # x = sub["iteration"].to_numpy()
+        # y = sub["mean_smooth"].to_numpy()
+        # e = sub["sem_smooth"].to_numpy()
+
+        # ax.plot(
+        #     x,
+        #     y,
+        #     label=CONDITION_LABELS[condition],
+        #     linewidth=1.5,
+        # )
+        # ax.fill_between(
+        #     x,
+        #     y - e,
+        #     y + e,
+        #     alpha=0.2,
+        #     linewidth=0,
+        # )
+
         x = sub["iteration"].to_numpy()
         y = sub["mean_smooth"].to_numpy()
         e = sub["sem_smooth"].to_numpy()
 
+        color = CONDITION_COLORS[condition]
         ax.plot(
             x,
             y,
             label=CONDITION_LABELS[condition],
             linewidth=1.5,
+            color=color,
         )
         ax.fill_between(
             x,
@@ -229,6 +261,7 @@ def plot_training_solve_rate(summary):
             y + e,
             alpha=0.2,
             linewidth=0,
+            color=color,
         )
 
     ax.set_xlabel("Training iteration")

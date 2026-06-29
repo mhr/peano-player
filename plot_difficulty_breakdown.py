@@ -35,11 +35,18 @@ import numpy as np
 #     ("grpo_sparse", "Bandit",                "#888888", "D"),
 # ]
 
+# CONDITIONS = [
+#     ("mdp_cost", "Peano Player", "#1f77b4", "o"),
+#     ("mdp_sparse", "Multi-Step (reward only)", "#ff7f0e", "s"),
+#     ("bandit_cost", "Bandit + cost", "#2ca02c", "^"),
+#     ("bandit_sparse", "Bandit", "#d62728", "D"),
+# ]
+
 CONDITIONS = [
-    ("mdp_cost", "Peano Player", "#1f77b4", "o"),
-    ("mdp_sparse", "Multi-Step (reward only)", "#ff7f0e", "s"),
-    ("bandit_cost", "Bandit + cost", "#2ca02c", "^"),
-    ("bandit_sparse", "Bandit", "#d62728", "D"),
+    ("mdp_cost",      "Peano Player",             "#E23145", "o"),  # bright red
+    ("mdp_sparse",    "Multi-Step (reward only)", "#FF7F0E", "s"),  # orange
+    ("bandit_cost",   "Bandit + cost",            "#2CA02C", "^"),  # green
+    ("bandit_sparse", "Bandit",                   "#1F77B4", "D"),  # blue
 ]
 
 
@@ -79,10 +86,15 @@ def main():
 
     # fig, ax = plt.subplots(figsize=(5, 3.5))
     plt.rcParams.update({
-        "font.family": "serif",
-        # "font.serif": ["Times", "Times New Roman", "STIX"],
-        "font.serif": ["DejaVu Serif"],
-        "mathtext.fontset": "stix",
+        # "font.family": "serif",
+        # # "font.serif": ["Times", "Times New Roman", "STIX"],
+        # "font.serif": ["DejaVu Serif"],
+        # "mathtext.fontset": "stix",
+        
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "mathtext.fontset": "dejavusans",
+
         "font.size": 9,
         "axes.labelsize": 9,
         "axes.titlesize": 9,
