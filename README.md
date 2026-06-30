@@ -9,3 +9,6 @@
 
 ## GPU (Linux + CUDA 12; the paper's runs used this)
 `$ pip install "jax[cuda12]==0.5.0"`
+
+# Paper
+- https://openreview.net/forum?id=LW3lsb9jA6
