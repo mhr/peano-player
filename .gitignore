@@ -1,0 +1,23 @@
+# Large / regenerable artifacts (not shipped in the public release)
+checkpoints/
+wandb/
+wandb_export/
+figures/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Internal working notes (not for public release)
+RELEASE_NOTES_TODO.md
+
+# Tooling / envs
+.venv/
+venv/
+.env
+.pytest_cache/
+.ipynb_checkpoints/

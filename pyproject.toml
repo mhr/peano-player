@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peano-player"
+version = "1.0.0"
+description = "RL for Lean 4 tactic synthesis over Peano arithmetic"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+    "equinox==0.11.11",
+    "jax==0.5.0",
+    "jaxlib==0.5.0",
+    "matplotlib==3.10.0",
+    "numpy==2.2.2",
+    "optax==0.2.4",
+    "pandas==2.2.3",
+    "pyarrow==23.0.1",
+    "tqdm==4.67.1",
+    "wandb==0.25.0",
+]
+
+[project.urls]
+Paper = "https://openreview.net/forum?id=LW3lsb9jA6"
+
+[tool.setuptools.packages.find]
+where = ["src"]

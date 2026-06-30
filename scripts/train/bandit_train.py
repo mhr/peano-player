@@ -1,9 +1,9 @@
 """
-grpo_bandit_train.py — Bandit GRPO/MaxRL with autoregressive tactic generation.
+bandit_train.py — Bandit GRPO with autoregressive tactic generation.
 
 Kim & Yun (ICLR 2026) MDP: model generates full tactic sequence from initial
 goal only, never seeing intermediate proof states. After generation, execute
-against env and score with GRPO or MaxRL + optional tactic φ.
+against env and score with GRPO + optional tactic φ.
 
 No EOS token — model always generates max_steps tactics. Execution stops at
 first error or proof closure; all steps are scored via first-error propagation.
@@ -13,9 +13,8 @@ MonolithPolicy, but input is [goal_bytes, SEP, prev_tactics] with causal
 attention over the full sequence.
 
 Usage:
-  python grpo_bandit_train.py --fresh --advantage grpo          # GRPO + φ
-  python grpo_bandit_train.py --fresh --advantage grpo --no-phi # GRPO binary
-  python grpo_bandit_train.py --fresh --advantage maxrl --no-phi # MaxRL binary
+  python scripts/train/bandit_train.py --fresh           # GRPO + φ
+  python scripts/train/bandit_train.py --fresh --no-phi  # GRPO binary
 """
 
 import os
@@ -41,8 +40,8 @@ try:
 except ImportError:
     HAS_WANDB = False
 
-from gen import generate_one, to_lean, clone, rewrite_in_goal, RULES, TACTIC_TO_IDX
-from models import AutoregressivePolicy, count_params, SEP_TOKEN, TACTIC_OFFSET
+from peano_player.gen import generate_one, to_lean, clone, rewrite_in_goal, RULES, TACTIC_TO_IDX
+from peano_player.models import AutoregressivePolicy, count_params, SEP_TOKEN, TACTIC_OFFSET
 
 print(f"JAX devices: {jax.devices()}")
 NUM_TACTICS = 4
@@ -67,7 +66,6 @@ class GRPOBanditConfig:
     G: int = 4
     d1: float = 0.0              # valid tactic, proof failed (matched to PPO)
     d2: float = -1.0             # erroneous tactic (matched to PPO)
-    advantage: str = "grpo"      # "grpo" or "maxrl"
     use_phi: bool = True          # use tactic φ process signal
     theorems_per_iter: int = 16
     max_steps: int = 20
@@ -216,28 +214,11 @@ def collect_batch(policy, cfg, key):
             total_costs += sum(1 for i in range(ep["num_steps"])
                                if ep["phi"][i] == cfg.d2)
 
-        # Skip degenerate groups for MaxRL
-        if cfg.advantage == "maxrl" and (K == 0 or K == len(episodes)):
-            # All same outcome — no contrastive signal
-            # Still include process signal if use_phi
-            if not cfg.use_phi:
-                continue
-
         for ei, ep in enumerate(episodes):
             n = ep["num_steps"]
 
-            # ── Outcome advantage ──
-            if cfg.advantage == "grpo":
-                a_outcome = (outcomes[ei] - mean_outcome) / std_outcome
-            elif cfg.advantage == "maxrl":
-                if K == 0 or K == len(episodes):
-                    a_outcome = 0.0
-                elif outcomes[ei] == 1.0:
-                    a_outcome = 1.0 / K
-                else:
-                    a_outcome = 0.0  # failures get zero outcome signal
-            else:
-                raise ValueError(f"Unknown advantage method: {cfg.advantage}")
+            # ── Outcome advantage (GRPO: normalize by group std) ──
+            a_outcome = (outcomes[ei] - mean_outcome) / std_outcome
 
             # ── Process advantage (tactic φ) ──
             if cfg.use_phi:
@@ -253,7 +234,7 @@ def collect_batch(policy, cfg, key):
             all_advantages.append(advantages)
 
     if not all_tokens:
-        # No training data (e.g. MaxRL skipped all groups), but still report metrics
+        # No training data this iteration, but still report metrics
         if total_episodes > 0:
             return {
                 "tokens": None,
@@ -333,10 +314,6 @@ def load_run_id(ckpt_dir):
 
 
 def train(cfg: GRPOBanditConfig):
-    if cfg.advantage == "maxrl" and cfg.use_phi:
-        raise ValueError("MaxRL with tactic φ is not valid — MaxRL discards failures, "
-                         "φ scores failures. Use --no-phi with --advantage maxrl.")
-
     key = jr.PRNGKey(cfg.seed)
     random.seed(cfg.seed)
     ckpt_dir = Path(cfg.checkpoint_dir)
@@ -356,7 +333,7 @@ def train(cfg: GRPOBanditConfig):
         num_tactics=cfg.num_tactics, key=model_key,
     )
     print(f"AutoregressivePolicy (BANDIT): {count_params(policy):,} params "
-          f"(advantage={cfg.advantage}, use_phi={cfg.use_phi}, "
+          f"(use_phi={cfg.use_phi}, "
           f"G={cfg.G}, d1={cfg.d1}, d2={cfg.d2})")
 
     opt = optax.chain(
@@ -375,7 +352,7 @@ def train(cfg: GRPOBanditConfig):
 
     if HAS_WANDB:
         phi_tag = "phi" if cfg.use_phi else "nophi"
-        tag = f"{cfg.advantage}-bandit-{phi_tag}"
+        tag = f"grpo-bandit-{phi_tag}"
         if cfg.fresh:
             run_id = f"{tag}-{int(time.time())}"
             save_run_id(run_id, ckpt_dir)
@@ -392,7 +369,7 @@ def train(cfg: GRPOBanditConfig):
     solve_ema, cost_ema, ema_alpha = 0.0, 0.0, 0.05
 
     phi_tag = "phi" if cfg.use_phi else "nophi"
-    desc = f"{cfg.advantage}-bandit-{phi_tag}"
+    desc = f"grpo-bandit-{phi_tag}"
     pbar = tqdm(range(start_iter, cfg.num_iterations), desc=desc,
                 initial=start_iter, total=cfg.num_iterations)
     for iteration in pbar:
@@ -404,7 +381,7 @@ def train(cfg: GRPOBanditConfig):
         solve_ema += ema_alpha * (batch["solve_rate"] - solve_ema)
         cost_ema += ema_alpha * (batch["mean_cost_per_ep"] - cost_ema)
 
-        # Skip gradient update if no training data (MaxRL all-degenerate)
+        # Skip gradient update if no training data this iteration
         has_training_data = batch["tokens"] is not None
         if has_training_data:
             N = batch["tokens"].shape[0]
@@ -473,37 +450,34 @@ def train(cfg: GRPOBanditConfig):
     save_checkpoint(policy, opt_state, cfg.num_iterations, ckpt_dir)
     if HAS_WANDB and wandb.run is not None:
         wandb.finish()
-    print(f"Bandit {cfg.advantage} training complete.")
+    print("Bandit GRPO training complete.")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Bandit GRPO/MaxRL for Peano tactic synthesis")
+    parser = argparse.ArgumentParser(description="Bandit GRPO for Peano tactic synthesis")
     parser.add_argument("--num-iterations", type=int, default=2000)
     parser.add_argument("--theorems-per-iter", type=int, default=16)
     parser.add_argument("--G", type=int, default=4)
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--d1", type=float, default=0.0)
     parser.add_argument("--d2", type=float, default=-1.0)
-    parser.add_argument("--advantage", choices=["grpo", "maxrl"], default="grpo",
-                        help="Advantage method: grpo (normalize by σ) or maxrl (normalize by K)")
     parser.add_argument("--no-phi", action="store_true",
                         help="Disable tactic φ process signal (binary outcome only)")
     parser.add_argument("--n-layers", type=int, default=5)
     parser.add_argument("--d-model", type=int, default=256)
     parser.add_argument("--max-difficulty", type=int, default=8)
     parser.add_argument("--fresh", action="store_true")
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
     phi_tag = "phi" if not args.no_phi else "nophi"
-    ckpt_dir = f"checkpoints/bandit_{args.advantage}_{phi_tag}_seed{args.seed}"
+    ckpt_dir = f"checkpoints/bandit_grpo_{phi_tag}_seed{args.seed}"
 
     cfg = GRPOBanditConfig(
         num_iterations=args.num_iterations,
         theorems_per_iter=args.theorems_per_iter,
         G=args.G, learning_rate=args.learning_rate,
         d1=args.d1, d2=args.d2,
-        advantage=args.advantage,
         use_phi=not args.no_phi,
         n_layers=args.n_layers, d_model=args.d_model,
         max_difficulty=args.max_difficulty,

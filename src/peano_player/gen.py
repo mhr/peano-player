@@ -23,8 +23,9 @@ Output:
   - A .lean file (self-contained, type-checkable in Lean 4)
   - A .jsonl file (one JSON object per theorem, for ML training)
 
-Usage:
-  python gen.py --num 500 --seed 0 --out-lean dataset.lean --out-jsonl dataset.jsonl
+Usage (run from the repository root):
+  python -m peano_player.gen --num 500 --seed 0 \
+      --out-lean data/peano_dataset.lean --out-jsonl data/peano_dataset.jsonl
 """
 
 import random
@@ -734,7 +735,7 @@ open PNat
 """
 
 
-def generate_dataset(num_theorems: int, seed: int = 42,
+def generate_dataset(num_theorems: int, seed: int = 42,  # 42 reproduces the released dataset
                      min_difficulty: int = 1, max_difficulty: int = 8
                      ) -> List[GeneratedTheorem]:
     """Generate a diverse dataset of theorems."""
@@ -861,16 +862,18 @@ def main():
     )
     parser.add_argument("--num", type=int, default=200,
                         help="Number of theorems to generate (default: 200)")
+    # 42 is the seed of record for the released peano_dataset.jsonl; the
+    # default reproduces that exact dataset. (Training/eval use seed 0.)
     parser.add_argument("--seed", type=int, default=42,
-                        help="Random seed (default: 42)")
+                        help="Random seed (default: 42 — reproduces the released dataset)")
     parser.add_argument("--min-difficulty", type=int, default=1,
                         help="Minimum difficulty / expansion steps (default: 1)")
     parser.add_argument("--max-difficulty", type=int, default=8,
                         help="Maximum difficulty / expansion steps (default: 8)")
-    parser.add_argument("--out-lean", type=str, default="peano_dataset.lean",
-                        help="Output Lean 4 file (default: peano_dataset.lean)")
-    parser.add_argument("--out-jsonl", type=str, default="peano_dataset.jsonl",
-                        help="Output JSONL file (default: peano_dataset.jsonl)")
+    parser.add_argument("--out-lean", type=str, default="data/peano_dataset.lean",
+                        help="Output Lean 4 file (default: data/peano_dataset.lean)")
+    parser.add_argument("--out-jsonl", type=str, default="data/peano_dataset.jsonl",
+                        help="Output JSONL file (default: data/peano_dataset.jsonl)")
     parser.add_argument("--stats", action="store_true", default=True,
                         help="Print dataset statistics")
     args = parser.parse_args()

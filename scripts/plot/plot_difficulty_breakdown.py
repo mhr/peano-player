@@ -15,7 +15,7 @@ Expected directory structure:
     grpo_cost_seed0.json     (GRPO + Kim & Yun)
 
 Usage:
-  python plot_difficulty_breakdown.py --results-dir results/ --output figures/difficulty_breakdown.pdf
+  python scripts/plot/plot_difficulty_breakdown.py --results-dir results/ --output figures/difficulty_breakdown.pdf
 """
 
 import argparse

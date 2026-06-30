@@ -7,7 +7,7 @@ Reads JSON files produced by eval_by_difficulty.py and reports:
   - d=8 solve rate in plain summary only
 
 Usage:
-  python make_results_table.py --results-dir results
+  python scripts/eval/make_results_table.py --results-dir results
 """
 
 import argparse

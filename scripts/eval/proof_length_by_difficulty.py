@@ -5,11 +5,11 @@ Generates theorems at each difficulty level and reports proof length statistics.
 This produces the data for Table 3 in the paper.
 
 Usage:
-  python proof_length_by_difficulty.py
+  python scripts/eval/proof_length_by_difficulty.py
 """
 
 import random
-from gen import generate_one
+from peano_player.gen import generate_one
 
 
 def main():

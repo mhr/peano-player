@@ -6,7 +6,7 @@ computes mean ± sample standard error across seeds, and plots four lines
 with shaded bands.
 
 Usage:
-  python plot_tactic_failure_by_difficulty.py \
+  python scripts/plot/plot_tactic_failure_by_difficulty.py \
       --results-dir results/ \
       --output figures/tactic_failure_by_difficulty.pdf
 """

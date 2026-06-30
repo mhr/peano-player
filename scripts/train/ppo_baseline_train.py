@@ -9,7 +9,7 @@ Default model config (d_model=256, n_layers=5) is param-matched
 to GoalConstraintPolicy (d_model=128, n_layers=4, 5 encoders) at ~4M params.
 
 Usage:
-  python ppo_baseline_train.py [--num-iterations 2000] [--fresh]
+  python scripts/train/ppo_baseline_train.py [--num-iterations 2000] [--fresh]
 """
 
 import os
@@ -35,11 +35,11 @@ try:
 except ImportError:
     HAS_WANDB = False
 
-from gen import (
+from peano_player.gen import (
     generate_one, to_lean, clone, rewrite_in_goal,
     RULES, TACTIC_TO_IDX,
 )
-from models import MonolithPolicy, count_params
+from peano_player.models import MonolithPolicy, count_params
 
 print(f"JAX devices: {jax.devices()}")
 
@@ -517,7 +517,7 @@ def main():
     parser.add_argument("--d-model", type=int, default=256)
     parser.add_argument("--max-difficulty", type=int, default=8)
     parser.add_argument("--fresh", action="store_true")
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--checkpoint-dir", type=str, default=None)
     args = parser.parse_args()
 

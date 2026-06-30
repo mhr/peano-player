@@ -6,12 +6,12 @@ import jax.numpy as jnp
 import jax.random as jr
 import numpy as np
 
-from gen import generate_one, to_lean, clone, rewrite_in_goal, RULES, Zero, Succ, Pred, Add, Var
+from peano_player.gen import generate_one, to_lean, clone, rewrite_in_goal, RULES, Zero, Succ, Pred, Add, Var
 from bandit_train import (
     tokenize_bandit, rollout_bandit, collect_batch, grpo_step,
     GRPOBanditConfig,
 )
-from models import AutoregressivePolicy, count_params, SEP_TOKEN, TACTIC_OFFSET
+from peano_player.models import AutoregressivePolicy, count_params, SEP_TOKEN, TACTIC_OFFSET
 
 results = {"passed": 0, "failed": 0}
 def check(name, cond):
@@ -192,24 +192,21 @@ if batch is not None:
     check("non-zero grads", any(jnp.any(g != 0) for g in grad_leaves))
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 6. MaxRL validation
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-print("\nMaxRL validation:")
-try:
-    bad_cfg = GRPOBanditConfig(advantage="maxrl", use_phi=True)
-    from bandit_train import train
-    train(bad_cfg)
-    check("maxrl+phi raises error", False)
-except ValueError as e:
-    check("maxrl+phi raises ValueError", "not valid" in str(e))
-
-
 print(f"\n{'='*50}")
 print(f"Passed: {results['passed']}, Failed: {results['failed']}")
-if results["failed"] == 0:
-    print("All tests passed!")
-else:
-    print(f"WARNING: {results['failed']} test(s) failed!")
-    import sys; sys.exit(1)
+print("All tests passed!" if results["failed"] == 0
+      else f"WARNING: {results['failed']} test(s) failed!")
+
+
+def test_bandit_invariants():
+    """Pytest entry point.
+
+    The invariant checks above execute at import time (populating ``results``);
+    this collected test makes pytest report a pass/fail and exit accordingly.
+    """
+    assert results["failed"] == 0, f"{results['failed']} check(s) failed"
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if results["failed"] == 0 else 1)

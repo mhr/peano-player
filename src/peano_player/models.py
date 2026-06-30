@@ -18,6 +18,12 @@ SEP_TOKEN = 250
 TACTIC_OFFSET = 252
 NUM_BANDIT_ACTIONS = 4
 
+
+def count_params(model) -> int:
+    leaves = jax.tree_util.tree_leaves(eqx.filter(model, eqx.is_array))
+    return sum(x.size for x in leaves)
+
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Shared building blocks
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -119,7 +125,7 @@ class MonolithPolicy(eqx.Module):
 
 class AutoregressivePolicy(eqx.Module):
     """Bandit/open-loop policy. [goal_bytes, SEP, prev_tactics] → 5 logits.
-    No value head — designed for critic-free methods (GRPO, MaxRL)."""
+    No value head — designed for critic-free methods (GRPO)."""
     encoder: TransformerEncoder
     head: eqx.nn.Linear
 

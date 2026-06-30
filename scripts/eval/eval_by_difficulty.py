@@ -6,19 +6,19 @@ rolls out episodes, and writes results to a JSON file.
 
 Usage:
   # MDP, cost (CMDP agent, λ=1):
-  python eval_by_difficulty.py --model ppo --checkpoint checkpoints/ppo_baseline/policy_2000.eqx \
+  python scripts/eval/eval_by_difficulty.py --model ppo --checkpoint checkpoints/ppo_baseline/policy_2000.eqx \
       --trials 100 --output results/ppo_cost_seed0.json
 
   # MDP, sparse (reward-only ablation, λ=0):
-  python eval_by_difficulty.py --model ppo --checkpoint checkpoints/ppo_sparse/policy_2000.eqx \
+  python scripts/eval/eval_by_difficulty.py --model ppo --checkpoint checkpoints/ppo_sparse/policy_2000.eqx \
       --trials 100 --output results/ppo_sparse_seed0.json
 
   # Bandit, sparse (GRPO baseline):
-  python eval_by_difficulty.py --model bandit --checkpoint checkpoints/grpo_sparse/policy_2000.eqx \
+  python scripts/eval/eval_by_difficulty.py --model bandit --checkpoint checkpoints/grpo_sparse/policy_2000.eqx \
       --trials 100 --output results/grpo_sparse_seed0.json
 
   # Bandit, cost (GRPO + Kim & Yun):
-  python eval_by_difficulty.py --model bandit --checkpoint checkpoints/grpo_cost/policy_2000.eqx \
+  python scripts/eval/eval_by_difficulty.py --model bandit --checkpoint checkpoints/grpo_cost/policy_2000.eqx \
       --trials 100 --output results/grpo_cost_seed0.json
 
 Full shell script:
@@ -28,22 +28,22 @@ EVAL_SEED=9999
 
 for seed in 0 1 2 3 4; do
   # MDP, cost (CMDP)
-  python eval_by_difficulty.py --model ppo \
+  python scripts/eval/eval_by_difficulty.py --model ppo \
     --checkpoint checkpoints/ppo_baseline_lambda1.0_seed${seed}/policy_2000.eqx \
     --trials $TRIALS --seed $EVAL_SEED --output results/mdp_cost_seed${seed}.json
 
   # MDP, sparse
-  python eval_by_difficulty.py --model ppo \
+  python scripts/eval/eval_by_difficulty.py --model ppo \
     --checkpoint checkpoints/ppo_baseline_lambda0.0_seed${seed}/policy_2000.eqx \
     --trials $TRIALS --seed $EVAL_SEED --output results/mdp_sparse_seed${seed}.json
 
   # Bandit, cost
-  python eval_by_difficulty.py --model bandit \
+  python scripts/eval/eval_by_difficulty.py --model bandit \
     --checkpoint checkpoints/bandit_grpo_phi_seed${seed}/policy_2000.eqx \
     --trials $TRIALS --seed $EVAL_SEED --output results/bandit_cost_seed${seed}.json
 
   # Bandit, sparse
-  python eval_by_difficulty.py --model bandit \
+  python scripts/eval/eval_by_difficulty.py --model bandit \
     --checkpoint checkpoints/bandit_grpo_nophi_seed${seed}/policy_2000.eqx \
     --trials $TRIALS --seed $EVAL_SEED --output results/bandit_sparse_seed${seed}.json
 done
@@ -60,8 +60,8 @@ import jax.numpy as jnp
 import jax.random as jr
 import numpy as np
 
-from gen import generate_one, to_lean, clone, RULES, rewrite_in_goal
-from models import MonolithPolicy, AutoregressivePolicy, SEP_TOKEN, TACTIC_OFFSET
+from peano_player.gen import generate_one, to_lean, clone, RULES, rewrite_in_goal
+from peano_player.models import MonolithPolicy, AutoregressivePolicy, SEP_TOKEN, TACTIC_OFFSET
 
 
 NUM_TACTICS = 4
